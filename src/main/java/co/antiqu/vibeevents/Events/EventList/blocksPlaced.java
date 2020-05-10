@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class blocksPlaced extends Event {
 
@@ -38,11 +39,12 @@ public class blocksPlaced extends Event {
         int placed = 0;
         if(blocks_placed_map.containsKey(evt.getPlayer())) {
             placed = blocks_placed_map.get(evt.getPlayer()) + 1;
+        } else {
+            blocks_placed_map.put(evt.getPlayer(), placed+1);
         }
-        blocks_placed_map.put(evt.getPlayer(),placed);
     }
 
-    public Player getWinner() {
+    public Player getWinner() {/*
         Player player = null;
         int placed_top = 0;
         for(Player n : blocks_placed_map.keySet()) {
@@ -53,7 +55,8 @@ public class blocksPlaced extends Event {
                 player = n;
             }
         }
-        return player;
+        return player;*/
+        return blocks_placed_map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
     }
 
     public boolean isOn() {

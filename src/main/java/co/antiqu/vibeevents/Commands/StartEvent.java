@@ -11,7 +11,7 @@ public class StartEvent implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
-            if(!((Player) sender).hasPermission("vibeevents.*")) {
+            if(!sender.hasPermission("vibeevents.*")) {
                 return false;
             }
         }

@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class blocksMoved extends Event {
 
@@ -38,11 +39,12 @@ public class blocksMoved extends Event {
         int moved = 0;
         if(blocks_ran_map.containsKey(evt.getPlayer())) {
             moved = blocks_ran_map.get(evt.getPlayer()) + 1;
+        } else {
+            blocks_ran_map.put(evt.getPlayer(), moved+1);
         }
-        blocks_ran_map.put(evt.getPlayer(),moved);
     }
 
-    public Player getWinner() {
+    public Player getWinner() {/*
         Player player = null;
         int blocks_ran_top = 0;
         for(Player n : blocks_ran_map.keySet()) {
@@ -53,7 +55,8 @@ public class blocksMoved extends Event {
                 player = n;
             }
         }
-        return player;
+        return player;*/
+        return blocks_ran_map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
     }
 
     public boolean isOn() {

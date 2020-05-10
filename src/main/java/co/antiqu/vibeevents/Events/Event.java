@@ -11,6 +11,7 @@ public abstract class Event implements Listener {
     public abstract String getName();
     public abstract void setOn();
     public abstract void setOff();
+    public abstract boolean isOn();
     public abstract String getDescription();
 
 }

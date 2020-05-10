@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class blocksBroken extends Event {
 
@@ -37,22 +38,13 @@ public class blocksBroken extends Event {
         int broken = 0;
         if(blocks_broken_map.containsKey(evt.getPlayer())) {
             broken = blocks_broken_map.get(evt.getPlayer()) + 1;
+        } else {
+            blocks_broken_map.put(evt.getPlayer(), broken+1);
         }
-        blocks_broken_map.put(evt.getPlayer(),broken);
     }
 
     public Player getWinner() {
-        Player player = null;
-        int broken_top = 0;
-        for(Player n : blocks_broken_map.keySet()) {
-            if(n == null || !n.isOnline()) {
-                continue;
-            }
-            if(blocks_broken_map.get(n) > broken_top) {
-                player = n;
-            }
-        }
-        return player;
+        return blocks_broken_map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
     }
 
     public boolean isOn() {

@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class caneBroken extends Event {
 
@@ -42,11 +43,12 @@ public class caneBroken extends Event {
         int cane = 0;
         if(cane_map.containsKey(evt.getPlayer())) {
             cane = cane_map.get(evt.getPlayer()) + 1;
+        } else {
+            cane_map.put(evt.getPlayer(), cane + 1);
         }
-        cane_map.put(evt.getPlayer(),cane);
     }
 
-    public Player getWinner() {
+    public Player getWinner() {/*
         Player player = null;
         int cane_top = 0;
         for(Player n : cane_map.keySet()) {
@@ -57,7 +59,8 @@ public class caneBroken extends Event {
                 player = n;
             }
         }
-        return player;
+        return player;*/
+        return cane_map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
     }
 
     public boolean isOn() {

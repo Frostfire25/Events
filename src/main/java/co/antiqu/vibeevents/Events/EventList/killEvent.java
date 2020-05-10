@@ -13,6 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class killEvent extends Event {
@@ -48,12 +49,13 @@ public class killEvent extends Event {
         int kills = 0;
         if(kills_map.containsKey(killer)) {
             kills = kills_map.get(killer) + 1;
+        } else {
+            kills_map.put(killer, kills+1);
         }
-        kills_map.put(killer,kills);
     }
 
     public Player getWinner() {
-        Player player = null;
+        Player player = null;/*
         int kills = 0;
         for(Player n : kills_map.keySet()) {
             if(n == null || !n.isOnline()) {
@@ -63,7 +65,8 @@ public class killEvent extends Event {
                 player = n;
             }
         }
-        return player;
+        return player;*/
+        return kills_map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
     }
 
     @Override
