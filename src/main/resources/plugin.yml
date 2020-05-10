@@ -1,0 +1,7 @@
+name: VibeEvents
+version: ${project.version}
+main: co.antiqu.vibeevents.VibeEvents
+api-version: 1.13
+authors: [Xanarchy_0001]
+commands:
+  startevent:
